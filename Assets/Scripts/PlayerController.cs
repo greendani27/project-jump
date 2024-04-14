@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour, ICharacter
 {
-    // Podria sacar una interfaz (ICharacter por ejemplo) con los metodos move, punch y flip para tanto el player como los enemies
-
+    #region components
     [SerializeField] Transform leftFootCheckPoint;
     [SerializeField] Transform rightFootCheckPoint;
     [SerializeField] Transform attackPoint;
@@ -14,6 +13,7 @@ public class PlayerController : MonoBehaviour, ICharacter
     [SerializeField] Rigidbody2D rbb;
     [SerializeField] Animator animator;
     [SerializeField] SpriteRenderer sr;
+    #endregion
 
     private float horizontalAxis;
 
@@ -42,30 +42,7 @@ public class PlayerController : MonoBehaviour, ICharacter
         Punch();
     }
 
-    private void Sprint() {
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            speed = maxSpeed;
-            animator.speed = 2;
-        }
-        else
-        {
-            speed = minSpeed;
-            animator.speed = 1;
-        }
-    }
-
-    private void Jump()
-    {
-        if (Input.GetKeyDown(KeyCode.Space) && onGround)
-        {
-            rbb.velocity = new Vector2(rbb.velocity.x, jumpForce);
-        }
-        if (Input.GetKeyUp(KeyCode.Space) && rbb.velocity.y > 0)
-        {
-            rbb.velocity = new Vector2(rbb.velocity.x, jumpForce * .5f);
-        }
-    }
+    #region interface methods
 
     public void Move()
     {
@@ -93,7 +70,7 @@ public class PlayerController : MonoBehaviour, ICharacter
             }
         }
     }
-
+    
     public void Flip()
     {
         if (horizontalAxis < 0)
@@ -105,11 +82,43 @@ public class PlayerController : MonoBehaviour, ICharacter
             sr.flipX = false;
         }
     }
+    #endregion
 
+    #region private methods
+    private void Sprint()
+    {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            speed = maxSpeed;
+            animator.speed = 2;
+        }
+        else
+        {
+            speed = minSpeed;
+            animator.speed = 1;
+        }
+    }
+
+    private void Jump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && onGround)
+        {
+            rbb.velocity = new Vector2(rbb.velocity.x, jumpForce);
+        }
+        if (Input.GetKeyUp(KeyCode.Space) && rbb.velocity.y > 0)
+        {
+            rbb.velocity = new Vector2(rbb.velocity.x, jumpForce * .5f);
+        }
+    }
+
+    #endregion
+
+    #region debugging methods
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(leftFootCheckPoint.position, .1f);
         Gizmos.DrawWireSphere(rightFootCheckPoint.position, .1f);
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
+    #endregion
 }
