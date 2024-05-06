@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour, ICharacter
     [SerializeField] Transform rightFootCheckPoint;
     [SerializeField] Transform attackPoint;
     [SerializeField] LayerMask groundLayer;
-    [SerializeField] LayerMask enemyLayer;
     [SerializeField] Rigidbody2D rbb;
     [SerializeField] Animator animator;
     [SerializeField] SpriteRenderer sr;
@@ -42,7 +41,7 @@ public class PlayerController : MonoBehaviour, ICharacter
         Punch();
     }
 
-    #region interface methods
+    #region heritage methods
 
     public void Move()
     {
@@ -64,10 +63,6 @@ public class PlayerController : MonoBehaviour, ICharacter
         if (Input.GetMouseButtonDown(0))
         {
             animator.SetTrigger("Punch");
-            if (Physics2D.OverlapCircle(attackPoint.position, attackRange, enemyLayer))
-            {
-                Debug.Log("entro");
-            }
         }
     }
     
@@ -107,7 +102,7 @@ public class PlayerController : MonoBehaviour, ICharacter
         }
         if (Input.GetKeyUp(KeyCode.Space) && rbb.velocity.y > 0)
         {
-            rbb.velocity = new Vector2(rbb.velocity.x, jumpForce * .5f);
+            rbb.velocity = new Vector2(rbb.velocity.x, rbb.velocity.y * .5f);
         }
     }
 
