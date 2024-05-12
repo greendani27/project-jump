@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour, ICharacter
 {
+    #region consts
+    private const float footCheckPointRange = .1f;
+    #endregion
+
     #region components
     [SerializeField] Transform leftFootCheckPoint;
     [SerializeField] Transform rightFootCheckPoint;
-    [SerializeField] Transform attackPoint;
     [SerializeField] LayerMask groundLayer;
+    [SerializeField] LayerMask enemyLayer;
     [SerializeField] Rigidbody2D rbb;
     [SerializeField] Animator animator;
     [SerializeField] SpriteRenderer sr;
     #endregion
+
+    public float health;
 
     private float horizontalAxis;
 
@@ -29,7 +35,7 @@ public class PlayerController : MonoBehaviour, ICharacter
     {
         horizontalAxis = Input.GetAxis("Horizontal");
 
-        onGround = Physics2D.OverlapCircle(leftFootCheckPoint.position, .1f, groundLayer) || Physics2D.OverlapCircle(rightFootCheckPoint.position, .1f, groundLayer);
+        onGround = Physics2D.OverlapCircle(leftFootCheckPoint.position, footCheckPointRange, groundLayer) || Physics2D.OverlapCircle(rightFootCheckPoint.position, footCheckPointRange, groundLayer);
 
         if (onGround == true)
             animator.SetBool("onGround", true);
@@ -106,14 +112,16 @@ public class PlayerController : MonoBehaviour, ICharacter
         }
     }
 
+    
+
     #endregion
 
     #region debugging methods
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawWireSphere(leftFootCheckPoint.position, .1f);
-        Gizmos.DrawWireSphere(rightFootCheckPoint.position, .1f);
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+        Debug.DrawRay(new Vector3(transform.position.x, transform.position.y + transform.localScale.y / 2, transform.position.z), transform.TransformDirection(Vector3.forward) * 1000, Color.green);
+        Gizmos.DrawWireSphere(leftFootCheckPoint.position, footCheckPointRange);
+        Gizmos.DrawWireSphere(rightFootCheckPoint.position, footCheckPointRange);
     }
     #endregion
 }

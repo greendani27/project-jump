@@ -394,13 +394,12 @@ Transform:
   m_GameObject: {fileID: 155140155}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.00052356074, z: 0, w: 0.9999999}
-  m_LocalPosition: {x: 0, y: -4.563605, z: 0}
+  m_LocalPosition: {x: 0, y: -4.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 226124354}
   - {fileID: 81643616}
-  - {fileID: 990596400}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0.06, z: 0}
 --- !u!50 &155140159
@@ -419,7 +418,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 6200000, guid: 9da3138a57d15be44b9363ebfcf4dcd0, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -465,16 +464,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftFootCheckPoint: {fileID: 226124354}
   rightFootCheckPoint: {fileID: 81643616}
-  attackPoint: {fileID: 990596400}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
   rbb: {fileID: 155140159}
   animator: {fileID: 155140161}
   sr: {fileID: 155140156}
+  health: 100
   jumpForce: 5
   attackRange: 0.7
   minSpeed: 5
@@ -963,37 +962,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &990596399
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 990596400}
-  m_Layer: 0
-  m_Name: AttackPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &990596400
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 990596399}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: 0.75, z: -0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 155140157}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1001219679
 GameObject:
   m_ObjectHideFlags: 0
@@ -1164,9 +1132,10 @@ GameObject:
   - component: {fileID: 1860345795}
   - component: {fileID: 1860345798}
   - component: {fileID: 1860345797}
+  - component: {fileID: 1860345799}
   m_Layer: 7
   m_Name: Square
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1310,6 +1279,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &1860345799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1860345794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 271e65f9c2e701046ad5939baf3502a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
 --- !u!1 &1864734529
 GameObject:
   m_ObjectHideFlags: 0

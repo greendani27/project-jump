@@ -360,4 +360,5 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
-  attackRange: 0.7
+  damage: 20
+  attackRange: 1.5
